@@ -20,7 +20,7 @@
 
 (defn parse-rows [lines]
   "parse a vector of lines into records following bovespa rules"
-  (map #(parse-row %1) lines))
+  (map parse-row lines))
 
 (defn parse-file [path]
   "parse every line in a file following bovespa rules, returning a vector of records"
