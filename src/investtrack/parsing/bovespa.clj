@@ -22,12 +22,20 @@
   "parse a vector of lines into records following bovespa rules"
   (map parse-row lines))
 
+(defn skip-first-and-last [lseq]
+  (drop-last
+    (next lseq)))
+
+(defn open-file-lazy [path]
+  (letfn [(read-next-line [rdr]
+            (lazy-seq
+              (if-let [line (.readLine rdr)]
+                (cons line (read-next-line rdr))
+                (do (.close rdr) nil))))]
+         (read-next-line (clojure.java.io/reader path))))
+
 (defn parse-file [path]
   "parse every line in a file following bovespa rules, returning a vector of records"
-  (with-open [rdr (reader path)]
-    (let [lines (line-seq rdr)]
-      (doall
-        (parse-rows
-          (drop 1 ; ignoring header line
-            (drop-last ; ignoring trailer line
-              (into [] lines))))))))
+  (parse-rows
+    (skip-first-and-last
+      (open-file-lazy path))))
