@@ -5,7 +5,8 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [compojure "1.5.1"]
                  [ring/ring-defaults "0.2.1"]
-                 [clj-time "0.14.0"]]
+                 [clj-time "0.14.0"]
+                 [capacitor "0.6.0"]]
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler investtrack.handler/app}
   :profiles
