@@ -5,6 +5,7 @@
 (def client (influx/make-client {:db "investtrack"}))
 (def query (partial influx/db-query client))
 (def insert-into (partial influx/write-point client))
+(def insert-many (partial influx/write-points client))
 
 (defn make-conditions [conditions]
     (if (empty? conditions)
@@ -22,9 +23,3 @@
                         (str "WHERE " conditions))]
                     (trim 
                         (join " " [selection source conditions])))))))
-
-
-(defn record->point
-    "transform a parsed record into influx point"
-    [record]
-)
