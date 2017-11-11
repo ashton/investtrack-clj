@@ -1,14 +1,18 @@
 (ns investtrack.database
   (:require [capacitor.core :as influx]
             [clojure.string :refer [join trim]]
-            [investtrack.util :as util]))
+            [investtrack.util :refer [influx->map]]))
+
+(defprotocol InfluxPoint
+  "type is able to transform self into an influx point"
+  (->influx-point [record]))
 
 (def client (influx/make-client {:db "investtrack"}))
 (def insert-into (partial influx/write-point client))
 (def insert-many (partial influx/write-points client))
 (defn query [influx-query]
   (let [result (influx/db-query client influx-query)]
-    (map util/influx->map (:results result))))
+    (map influx->map (:results result))))
 
 (defn make-conditions [conditions]
   (if (empty? conditions)
