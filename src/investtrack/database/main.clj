@@ -1,7 +1,7 @@
-(ns investtrack.database
+(ns investtrack.database.main
   (:require [capacitor.core :as influx]
             [clojure.string :refer [join trim]]
-            [investtrack.util :refer [influx->map]]))
+            [investtrack.database.util :refer [influx->map]]))
             
 (defprotocol InfluxPoint
   "type is able to transform self into an influx point"

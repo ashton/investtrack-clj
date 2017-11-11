@@ -1,4 +1,4 @@
-(ns investtrack.util)
+(ns investtrack.database.util)
 
 (defn create-influx-point
   "create a influx point with given data"

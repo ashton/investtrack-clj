@@ -1,6 +1,6 @@
-(ns investtrack.util-test 
+(ns investtrack.database.util-test 
   (:require [clojure.test :refer :all]
-            [investtrack.util :refer :all]))
+            [investtrack.database.util :refer :all]))
 
 (deftest util-test
   (testing "create-influx-point"

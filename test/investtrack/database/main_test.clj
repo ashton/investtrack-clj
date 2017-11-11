@@ -1,6 +1,6 @@
-(ns investtrack.database-test
+(ns investtrack.database.main-test
   (:require [clojure.test :refer :all]
-            [investtrack.database :as db]))
+            [investtrack.database.main :as db]))
 
 (deftest database-test
   (testing "query builder with :all keyword"

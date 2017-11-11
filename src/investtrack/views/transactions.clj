@@ -1,5 +1,5 @@
 (ns investtrack.views.transactions
-  (:require [investtrack.database :as db])
+  (:require [investtrack.database.main :as db])
   (:use [ring.util.response]))
 
 (defn index []

@@ -1,7 +1,7 @@
 (ns investtrack.models
   (:require
-    [investtrack.util :refer [create-influx-point]]
-    [investtrack.database :refer [InfluxPoint]]))
+    [investtrack.database.main :refer [InfluxPoint]]
+    [investtrack.database.util :refer [create-influx-point]]))
 
 (defrecord Share 
   [code
