@@ -15,6 +15,7 @@
   "tranform a influx point into a clojure map"
   [influx-point]
   (let [item (first (:series influx-point))]
-    (let [columns (map keyword (:columns item))]
-      (let [values (first (:values item))]
-        (zipmap columns values)))))
+    (let 
+      [columns (map keyword (:columns item))
+       values (first (:values item))]
+      (zipmap columns values))))
