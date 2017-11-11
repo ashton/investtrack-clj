@@ -4,7 +4,7 @@
 
 (defn parse-float [value]
   "transform a 13 (last 2 decimals) digit number in a float"
-  (Float/parseFloat
+  (Double/parseDouble
    (str
     (subs value 0 11) "." (subs value 11))))
 

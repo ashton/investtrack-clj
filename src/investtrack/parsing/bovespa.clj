@@ -18,9 +18,7 @@
    {}
    bovespa-rules/historical-data))
 
-(defn parse-rows [lines]
-  "parse a vector of lines into records following bovespa rules"
-  (map parse-row lines))
+(def parse-rows (partial map parse-row))
 
 (defn skip-first-and-last [lseq]
   (drop-last
@@ -36,6 +34,7 @@
 
 (defn parse-file [path]
   "parse every line in a file following bovespa rules, returning a vector of records"
-  (parse-rows
-   (skip-first-and-last
-    (open-file-lazy path))))
+  (-> path
+      open-file-lazy
+      skip-first-and-last
+      parse-rows))
