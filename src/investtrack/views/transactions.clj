@@ -3,6 +3,5 @@
   (:use [ring.util.response]))
 
 (defn index []
-  (let [select-all (db/select :all :from "transactions")]
     (response
-     (db/query select-all))))
+     (db/query (db/find :all :in "transactions"))))
