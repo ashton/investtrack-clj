@@ -6,10 +6,10 @@
 
   (assoc
    {}
-   :measurement "shares"
+   :measurement measurement-name
    :tags (select-keys this tags)
    :fields (select-keys this values)
-   :timestamp (get timestamp this)))
+   :timestamp (get this timestamp)))
 
 (defn influx->map
   "tranform a influx point into a clojure map"
