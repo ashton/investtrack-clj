@@ -1,20 +1,23 @@
-(ns investtrack.util
-  (:require [clj-time.coerce :refer [to-long]]))
+(ns investtrack.util)
+  
+  
+(defprotocol InfluxPoint
+  "type is able to transform self into an influx point"
+  
+  (->influx-point [record]))
 
-(defn bovespa->influx-share
-  "transforms a bovespa data map into a influx point"
-  [bovespa-record]
-  (def tags [:code :market-type :name])
-  (def values [:opening-price :max-price :min-price :avg-price :last-price :best-buy :best-sell :trade-count :trade-amount])
+(defn create-influx-point
+  "create a influx point with given data"
+  [measurement-name tags values timestamp this]
 
   (assoc
    {}
    :measurement "shares"
-   :tags (select-keys bovespa-record tags)
-   :fields (select-keys bovespa-record values)
-   :timestamp (to-long (:date bovespa-record))))
+   :tags (select-keys this tags)
+   :fields (select-keys this values)
+   :timestamp (get timestamp this)))
 
-(defn influx->map
+(defn influx->record
   "tranform a influx point into a clojure map"
   [influx-point]
   (let [item (first (:series influx-point))]
