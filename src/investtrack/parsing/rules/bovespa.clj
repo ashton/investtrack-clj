@@ -15,7 +15,7 @@
 
 (def parse-text trim)
 
-(defn parse-num [value] (Integer/parseInt value))
+(defn parse-num [value] (Long/parseLong value))
 
 (def historical-data
   [{:id "date" :start-pos 3 :end-pos 10 :formatter parse-date}
