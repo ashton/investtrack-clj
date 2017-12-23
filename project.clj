@@ -12,10 +12,17 @@
                  [ring/ring-defaults "0.2.1"]
                  [ring/ring-json "0.4.0"]
                  [clj-time "0.14.0"]
-                 [capacitor "0.6.0"]]
+                 [korma "0.4.0"]
+                 [org.postgresql/postgresql "9.2-1002-jdbc4"]
+                 [ragtime "0.7.2"]]
+
   :plugins [[lein-ring "0.9.7"]]
+
   :ring {:handler investtrack.main/app}
-  :profiles
-  {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring/ring-mock "0.3.0"]
-                        [pjstadig/humane-test-output "0.8.3"]]}})
+
+  :aliases {"import"   ["run" "-m" "investtrack.scripts.import/import-file"]
+            "migrate"  ["run" "-m" "investtrack.scripts.migration/migrate"]
+            "rollback" ["run" "-m" "investtrack.scripts.migration/rollback"]}
+  :profiles {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
+                                 [ring/ring-mock "0.3.0"]
+                                 [pjstadig/humane-test-output "0.8.3"]]}})
